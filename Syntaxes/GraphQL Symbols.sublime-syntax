@@ -1,0 +1,63 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Symbols
+hidden: true
+scope: source.graphql
+contexts:
+
+  main:
+    - include: symbols
+
+  symbols:
+    - match: '\|'
+      scope: punctuation.definition.generic.pipe.graphql
+    
+    - match: '\,'
+      scope: punctuation.definition.generic.comma.graphql
+
+    - match: '\='
+      scope: keyword.operator.assignment.graphql
+
+    - match: '(\.{3})'
+      scope: punctuation.definition.generic.rest-args.graphql
+        
+    - match: '(?<=\.{3})([_a-zA-Z0-9]*)\b'
+      scope: constant.language.graphql
+
+    - match: '(!)'
+      captures:
+        1: variable.language.graphql
+    - match: '(?<=\= )\b([A-Z]*)\b'
+      captures:
+        1: constant.character.graphql
+    
+    - match: ':'
+      scope: punctuation.separator.mapping.key-value.graphql
+    
+    - match: '\$'
+      scope: punctuation.definition.placeholder.variable.graphql
+      push:
+        - match: \b([_a-zA-Z0-9\-]+)\b
+          scope: constant.language.variable.names.graphql
+          push:
+            - match: ''
+              pop: true
+        - match: ''
+          pop: true
+    
+    - match: '@'
+      scope: punctuation.definition.placeholder.directives.graphql
+      push:
+        - match: \b(include|skip)\b
+          scope: variable.language.directives.builtins.graphql
+          push:
+            - match: ''
+              pop: true
+        - match: \b([_A-Za-z][_A-Za-z0-9]*)\b
+          scope: variable.language.directives.other.graphql
+          push:
+            - match: ''
+              pop: true
+        - match: ''
+          pop: true

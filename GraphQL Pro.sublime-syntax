@@ -1,0 +1,87 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Pro
+file_extensions:
+  - graphql
+  - gql
+scope: source.graphql
+contexts:
+
+  main:
+    - include: GraphQL Comments.sublime-syntax
+    - include: GraphQL Types.sublime-syntax
+    - include: GraphQL Common.sublime-syntax
+    - include: GraphQL Symbols.sublime-syntax
+    - include: braces
+    - include: brackets
+    - include: parens
+    - include: properties
+    - include: meta_fields
+  
+  braces:
+    
+    - match: '\b([a-zA-Z]*)\b(?= \{)'
+      scope: entity.name.function.property.graphql
+    
+    - match: '\{'
+      scope: punctuation.section.braces.begin.graphql
+      push:
+        - meta_scope: meta.braces.graphql
+        - meta_content_scope: constant.character.graphql
+        - match: '\}'
+          scope: punctuation.section.braces.end.graphql
+          pop: true
+        - include: main
+  
+  brackets:
+    
+    - match: '\['
+      scope: punctuation.section.brackets.begin.graphql
+      push:
+        - meta_scope: meta.brackets.graphql
+        
+        - match: '(\])(!)'
+          captures:
+            1: punctuation.section.brackets.end.graphql
+            2: variable.language.graphql
+          pop: true
+        
+        - match: '\]'
+          scope: punctuation.section.brackets.end.graphql
+          pop: true
+        - include: main
+  
+  parens:
+    
+    - match: '\('
+      scope: punctuation.section.parens.begin.graphql
+      push:
+        - meta_scope: meta.parens.graphql
+        - match: '\)'
+          scope: punctuation.section.parens.end.graphql
+          pop: true
+        - include: main
+
+  properties:
+    
+    - match: '\b([_A-Za-z][_A-Za-z0-9]+)(?=\()\b'
+      scope: entity.name.function.graphql
+
+    - match: '(?<=\()\w*(?=\:)'
+      scope: string.unquoted.property.graphql
+
+    - match: '\b(\w+)\b(\:)\s*([_a-zA-Z0-9]*)(?=\()'
+      captures:
+        1: keyword.control.field.alias.graphql
+        2: punctuation.separator.mapping.key-value.graphql
+        3: entity.name.function.graphql
+
+    - match: '\w*(?=\:)'
+      scope: string.unquoted.property.graphql
+  
+  meta_fields:
+
+    - match: '\b(__(type(name)?|schema|field|enum|input|directive))\b'
+      captures:
+        1: keyword.declaration.introspections.meta-fields.graphql

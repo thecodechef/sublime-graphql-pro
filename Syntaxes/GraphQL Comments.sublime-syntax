@@ -1,0 +1,33 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Comments
+hidden: true
+scope: source.graphql
+
+variables:
+  comment_char: '[#]'
+
+contexts:
+  main:
+    - include: comments
+
+
+  comments:
+    # Comments begin with a '#' and finish at the end of the line
+    - match: ({{comment_char}}).*\n?
+      scope: comment.line.graphql
+      captures:
+        1: punctuation.definition.comment.graphql
+      push: line_comment
+
+    - match: ^\s*({{comment_char}}).*\n?
+      scope: comment.line.graphql
+      captures:
+        1: punctuation.definition.comment.graphql
+      push: line_comment
+  
+  line_comment:
+    - meta_content_scope: comment.line.graphql
+    - match: $
+      pop: true

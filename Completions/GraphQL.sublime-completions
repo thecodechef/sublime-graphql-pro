@@ -1,0 +1,22 @@
+{
+  "scope": "source.graphql",
+  "completions": [
+  	{ "trigger": "mutation", "contents": "mutation {\n\t$0\n}"},
+  	{ "trigger": "query", "contents": "query {\n\t$0\n}"},
+  	{ "trigger": "subscription", "contents": "subscription {\n\t$0\n}"},
+    { "trigger": "enum", "contents": "enum $1 {\n\t$0\n}"},
+    { "trigger": "input", "contents": "input $1 {\n\t$0\n}"},
+    { "trigger": "interface", "contents": "interface $1 {\n\t$0\n}"},
+    { "trigger": "scalar", "contents": "scalar $0"},
+    { "trigger": "schema", "contents": "schema {\n\t$0\n}"},
+    { "trigger": "ti", "contents": "type $1 implements $2 {\n\t$0\n}"},
+    { "trigger": "type", "contents": "type $1 {\n\t$0\n}"},
+    { "trigger": "union", "contents": "union $1 = $0"},
+    
+    { "trigger": "bool", "contents": "Boolean$0"},
+    { "trigger": "float", "contents": "Float$0"},
+    { "trigger": "id", "contents": "ID$0"},
+    { "trigger": "int", "contents": "Int$0"},
+    { "trigger": "str", "contents": "String$0"},
+  ]
+}
