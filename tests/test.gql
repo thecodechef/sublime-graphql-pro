@@ -119,3 +119,13 @@ fragment comparisonFields on Character {
 @skip(if: Boolean)
 
 @relationship("<=FOLLOWED=")
+
+
+query taskLogs ($id: ID!) {
+  taskLogs: task(id: $id) {
+    id
+    logs {
+      ...taskLog
+    }
+  }
+}
