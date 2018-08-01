@@ -1,0 +1,28 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Properties
+hidden: true
+scope: source.graphql
+contexts:
+
+  main:
+
+    - include: properties
+
+  properties:
+    
+    - match: '\b([_A-Za-z][_A-Za-z0-9]+)(?=\()\b'
+      scope: entity.name.function.graphql
+
+    - match: '(?<=\()\w*(?=\:)'
+      scope: string.unquoted.property.graphql
+
+    - match: '\b(\w+)\b(\:)\s*([_a-zA-Z0-9]*)(?=\()'
+      captures:
+        1: keyword.control.field.alias.graphql
+        2: punctuation.separator.mapping.key-value.graphql
+        3: entity.name.function.graphql
+
+    - match: '(\w*)(?=\s*\:)'
+      scope: string.unquoted.property.graphql

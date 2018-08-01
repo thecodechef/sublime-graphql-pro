@@ -1,0 +1,76 @@
+%YAML 1.2
+---
+name: GraphQL Config (JSON)
+file_extensions:
+  - .graphqlconfig
+scope: source.graphqlconfig
+
+contexts:
+  main:
+    - match: '\/\/'
+      scope: comment.line.double-slash.graphqlconfig
+      push:
+        - meta_content_scope: comment.line.graphqlconfig
+        - match: $
+          pop: true
+    
+    - match: '\/\*'
+      scope: comment.block.documentation.graphqlconfig, comment.block.documentation.begin.graphqlconfig
+      push:
+        - meta_content_scope: comment.block.documentation.graphqlconfig
+        - match: '\*\/'
+          scope: comment.block.documentation.graphqlconfig, comment.block.documentation.end.graphqlconfig
+          pop: true
+    
+    - match: (\")(.*)(\")(\:)
+      captures:
+        1: punctuation.definition.string.begin.graphqlconfig
+        3: punctuation.definition.string.end.graphqlconfig
+        2: keyword.declaration.key.graphqlconfig
+        4: punctuation.separator.mapping.key-value.graphqlconfig
+    
+    - match: (\")
+      scope: punctuation.definition.string.begin.graphqlconfig
+      push:
+        - meta_content_scope: string.quoted.double.graphqlconfig
+        - match: \1
+          scope: punctuation.definition.string.end.graphqlconfig
+          pop: true
+    
+    - match: (\,)
+      scope: punctuation.separator.sequence.graphqlconfig
+    
+    - match: '(\-)?([0-9]*(\.{1})[0-9]*)'
+      captures:
+        1: punctuation.terminator.graphqlconfig
+        2: constant.numeric.float.graphqlconfig
+        3: punctuation.separator.decimal.graphqlconfig
+
+    - match: '(\-)?([0-9]*)'
+      captures:
+        1: punctuation.terminator.graphqlconfig
+        2: constant.numeric.integer.graphqlconfig
+
+    - match: '\b(true|false|null)\b'
+      scope: constant.language.booleans.graphqlconfig
+    
+    - include: braces
+    - include: brackets
+
+  braces:
+    - match: (\{)
+      scope: punctuation.section.braces.begin.graphqlconfig
+      push:
+        - meta_scope: meta.braces.graphqlconfig
+        - include: main        
+        - match: (\})
+          scope: punctuation.section.braces.end.graphqlconfig
+
+  brackets:
+    - match: (\[)
+      scope: punctuation.section.brackets.begin.graphqlconfig
+      push:
+        - meta_scope: meta.brackets.graphqlconfig
+        - include: main        
+        - match: (\])
+          scope: punctuation.section.brackets.end.graphqlconfig

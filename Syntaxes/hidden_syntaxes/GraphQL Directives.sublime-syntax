@@ -1,0 +1,80 @@
+%YAML 1.2
+---
+name: GraphQL Directives
+hidden: true
+scope: source.graphql
+
+variables:
+  
+  executable_directive_locations: |-
+    (?x) \b(
+      QUERY               |
+      MUTATION            |
+      SUBSCRIPTION        |
+      FIELD               |
+      FRAGMENT_DEFINITION |
+      FRAGMENT_SPREAD     |
+      INLINE_FRAGMENT
+    )\b
+  
+  type_directive_locations: |-
+    (?x) \b(
+      SCHEMA              |
+      SCALAR              |
+      OBJECT              |
+      FIELD_DEFINITION    |
+      ARGUMENT_DEFINITION |
+      INTERFACE           |
+      UNION               |
+      ENUM                |
+      ENUM_VALUE          |
+      INPUT_OBJECT        |
+      INPUT_FIELD_DEFINITION
+    )\b
+  
+  length_directive_locations: |-
+    (?x) \b(
+      METER |
+      FOOT
+    )\b
+
+  custom_directive_locations: |-
+    (?x) \b([A-Z]*)\b
+
+contexts:
+  
+  main:
+
+    - include: directives
+    - include: directive_locations
+  
+  directives:
+    
+    - match: '@'
+      scope: punctuation.definition.directives.graphql
+      push:
+        - match: \b(include|skip|deprecated)\b
+          scope: variable.language.directives.builtins.graphql
+          push:
+            - match: ''
+              pop: true
+        - match: \b([_A-Za-z][_A-Za-z0-9]*)\b
+          scope: variable.language.directives.custom.graphql
+          push:
+            - match: ''
+              pop: true
+        - match: ''
+          pop: true
+  
+  directive_locations:
+    - match: '(?<=\= |\| |on |implements ){{executable_directive_locations}}'
+      scope: constant.language.directive.locations.excutables.graphql
+
+    - match: '(?<=\= |\| |on |implements ){{type_directive_locations}}'
+      scope: constant.language.directive.locations.types.graphql
+
+    - match: '(?<=\= |\| |on |implements ){{length_directive_locations}}'
+      scope: constant.language.directive.locations.length.graphql
+
+    - match: '(?<=\= |\| |on |implements ){{custom_directive_locations}}'
+      scope: constant.language.directive.locations.custom.graphql

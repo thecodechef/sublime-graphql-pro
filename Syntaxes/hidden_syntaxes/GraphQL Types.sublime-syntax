@@ -1,0 +1,49 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Types
+hidden: true
+scope: source.graphql
+
+variables:
+  scalar_types: |-
+    (?x) \b(
+      String   |
+      ID       |
+      Url      |
+      Date     |
+      DateTime |
+      Int      |
+      Float    |
+      Boolean  |
+      NonNull
+    )\b
+contexts:
+  main:
+    
+    - include: scalar_types
+    - include: union_types
+    - include: custom_types
+  
+  scalar_types:
+    
+    - match: '{{scalar_types}}'
+      scope: support.type.language.scalar-types.graphql
+      push:
+        - match: ''
+          pop: true
+    
+    - match: '\b([A-Z][A-Z])\b'
+      scope: constant.character.language-codes.graphql
+      push:
+        - match: ''
+          pop: true
+
+  union_types:
+
+    - match: '(?<=\= |\| )\b([A-Z][A-Za-z0-9_]+)\b'
+      scope: support.type.language.types.graphql, support.type.language.union-types.graphql
+
+  custom_types:
+    - match: '\b([A-Z]+[A-Za-z0-9_]*)\b'
+      scope: support.type.language.types.graphql, support.type.language.custom-types.graphql

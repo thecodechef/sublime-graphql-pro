@@ -1,0 +1,34 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Meta
+hidden: true
+scope: source.graphql
+
+contexts:
+
+  main:
+
+    - include: meta_fields
+
+  meta_fields:
+
+    - match: '\b(__(type|Type))\b'
+      captures:
+        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
+        2: keyword.declaration.introspections.meta-fields.type.graphql
+
+    - match: '\b(__(typename|TypeName))\b'
+      captures:
+        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
+        2: keyword.declaration.introspections.meta-fields.typename.graphql
+
+    - match: '\b(__(typekind|TypeKind))\b'
+      captures:
+        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
+        2: keyword.declaration.introspections.meta-fields.typekind.graphql
+
+    - match: '\b(__(schema|Schema))\b'
+      captures:
+        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
+        2: keyword.declaration.introspections.meta-fields.schema.graphql

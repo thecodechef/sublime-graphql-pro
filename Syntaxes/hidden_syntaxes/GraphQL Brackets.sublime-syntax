@@ -1,0 +1,35 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Brackets
+hidden: true
+scope: source.graphql
+
+
+contexts:
+  
+  main:
+    - include: brackets
+
+  syntaxes:
+    - include: GraphQL Common.sublime-syntax
+    - include: GraphQL Types.sublime-syntax
+    - include: GraphQL Symbols.sublime-syntax
+
+  brackets:
+    
+    - match: '\['
+      scope: punctuation.section.brackets.begin.graphql
+      push:
+        - meta_scope: meta.brackets.graphql
+        
+        - match: '(\])(!)'
+          captures:
+            1: punctuation.section.brackets.end.graphql
+            2: variable.language.non-null.graphql
+          pop: true
+        
+        - match: '\]'
+          scope: punctuation.section.brackets.end.graphql
+          pop: true
+        - include: syntaxes

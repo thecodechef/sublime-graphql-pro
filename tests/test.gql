@@ -1,131 +1,44 @@
+directive @role(is: Role = HERO) on FIELD_DEFINITION | OBJECT
 
-type Link @model {
-  url: String!
-  description: String!
-  createdAt: DateTime!
-  id: ID! @isUnique
-  updatedAt: DateTime!
-  postedBy: User @relation(name: "UsersLinks")
-  votes: [Vote!]! @relation(name: "VotesOnLink")
+enum Role {
+  HERO
+  VILLAN
 }
 
-type User @model {
-  createdAt: DateTime!
-  email: String @isUnique
-  id: ID! @isUnique
-  password: String
-  updatedAt: DateTime!
-  name: String!
-  links: [Link!]! @relation(name: "UsersLinks")
-  votes: [Vote!]! @relation(name: "UsersVotes")
-}
-
-type Vote @model {
-  user: User! @relation(name: "UsersVotes")
-  link: Link! @relation(name: "VotesOnLink")
-  createdAt: DateTime!
-  id: ID! @isUnique
-  updatedAt: DateTime!
-}
-
-type Starship {
+interface Character {
   id: ID!
   name: String!
-  length(unit: LengthUnit = METER): Float
+  description: String!
 }
 
-query {
-  hero {
-    name
-  }
-  droid(id: "2000") {
-    name
-  }
-}
-
-union SearchResult = Human | Droid | Starship
-
-{
-  search(text: "an") {
-    ... on Human {
-      name
-      height
-    }
-    ... on Droid {
-      name
-      primaryFunction
-    }
-    ... on Starship {
-      name
-      length
-    }
+type Hero implements Character @role(is: HERO) {
+  id: ID!
+  name: String!
+  description: String!
+  allies @include(if: $hasAllies) {
+    ...heroHasAllies
   }
 }
 
-input ReviewInput {
-  stars: Int!
-  commentary: String
-}
-
-mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
-  createReview(episode: $ep, review: $review) {
-    stars
-    commentary
+type Villan implements Character @role(is: VILLAN) {
+  id: ID!
+  name: String!
+  description: String!
+  allies @include(if: $hasAllies) {
+    ...villanHasAllies
   }
 }
 
-{
-  empireHero: hero(episode: EMPIRE) {
-    name
-  }
-  jediHero: hero(episode: JEDI) {
-    name
-  }
+fragment heroHasAllies on Hero {
+  id: ID!
+  name: String!
+  description: String!
+  role: String! @role(is: HERO)
 }
 
-{
-  leftComparison: hero(episode: EMPIRE) {
-    ...comparisonFields
-  }
-  rightComparison: hero(episode: JEDI) {
-    ...comparisonFields
-  }
-}
-
-fragment comparisonFields on Character {
-  name
-  appearsIn
-  friends {
-    name
-  }
-}
-
-{
-  search(text: "an") {
-    __typename
-    ... on Human {
-      name
-    }
-    ... on Droid {
-      name
-    }
-    ... on Starship {
-      name
-    }
-  }
-}
-
-@include(if: Boolean)
-@skip(if: Boolean)
-
-@relationship("<=FOLLOWED=")
-
-
-query taskLogs ($id: ID!) {
-  taskLogs: task(id: $id) {
-    id
-    logs {
-      ...taskLog
-    }
-  }
+fragment villanHasAllies on Villan {
+  id: ID!
+  name: String!
+  description: String!
+  role: String! @role(is: VILLAN)
 }

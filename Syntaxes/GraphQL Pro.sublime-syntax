@@ -1,0 +1,23 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Pro
+file_extensions:
+  - graphql
+  - gql
+scope: source.graphql
+contexts:
+
+  main:
+    - include: GraphQL Comments.sublime-syntax
+    - include: GraphQL Directives.sublime-syntax
+    - include: GraphQL Common.sublime-syntax
+    - include: GraphQL Meta.sublime-syntax
+    - include: GraphQL Types.sublime-syntax
+    - include: GraphQL Symbols.sublime-syntax
+    - include: GraphQL Braces.sublime-syntax
+    - include: GraphQL Brackets.sublime-syntax
+    - include: GraphQL Parens.sublime-syntax
+    - include: GraphQL Properties.sublime-syntax
+
+  

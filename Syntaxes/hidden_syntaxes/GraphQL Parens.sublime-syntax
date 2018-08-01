@@ -1,0 +1,30 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: GraphQL Parens
+hidden: true
+scope: source.graphql
+
+contexts:
+  main:
+    - include: parens
+
+  syntaxes:
+    - include: GraphQL Comments.sublime-syntax
+    - include: GraphQL Directives.sublime-syntax
+    - include: GraphQL Types.sublime-syntax
+    - include: GraphQL Common.sublime-syntax
+    - include: GraphQL Symbols.sublime-syntax
+    - include: GraphQL Properties.sublime-syntax
+    - include: GraphQL Meta.sublime-syntax
+
+  parens:
+    
+    - match: '\('
+      scope: punctuation.section.parens.begin.graphql
+      push:
+        - meta_scope: meta.parens.graphql
+        - match: '\)'
+          scope: punctuation.section.parens.end.graphql
+          pop: true
+        - include: syntaxes

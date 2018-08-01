@@ -1,0 +1,24 @@
+// Comment Line
+
+
+/* Comment Block */
+
+{
+	"schemaPath": "schema.graphql",
+	"extensions": {
+		"endpoints": {
+			"dev": {
+				"url": "http://example.com/graphql",
+				"headers": {
+					"Authorization": "Bearer ${env:YOUR_AUTH_TOKEN}"
+				},
+				"subscription": {
+					"url": "ws://example.com/graphql",
+					"connectionParams": {
+						"Token": "${env:YOUR_APP_TOKEN}"
+					}
+				}
+			}
+		}
+	}
+}

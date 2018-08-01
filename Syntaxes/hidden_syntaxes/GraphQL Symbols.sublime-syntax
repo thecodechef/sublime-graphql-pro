@@ -20,10 +20,16 @@ contexts:
       scope: keyword.operator.assignment.graphql
 
     - match: '(\.{3})'
-      scope: punctuation.definition.generic.rest-args.graphql
+      scope: punctuation.definition.fragment.call.definition.graphql
+
+    - match: '(\.{2})'
+      scope: punctuation.definition.fragment.nested.call.definition.graphql
         
     - match: '(?<=\.{3})([_a-zA-Z0-9]*)\b'
-      scope: constant.language.graphql
+      scope: constant.language.fragment.call.name.graphql
+
+    - match: '(?<=\.{2})([_a-zA-Z0-9]*)\b'
+      scope: constant.language.fragment.call.name.graphql
 
     - match: '(!)'
       captures:
@@ -47,15 +53,15 @@ contexts:
           pop: true
     
     - match: '@'
-      scope: punctuation.definition.placeholder.directives.graphql
+      scope: punctuation.definition.directives.graphql
       push:
-        - match: \b(include|skip)\b
+        - match: \b(include|skip|deprecated)\b
           scope: variable.language.directives.builtins.graphql
           push:
             - match: ''
               pop: true
         - match: \b([_A-Za-z][_A-Za-z0-9]*)\b
-          scope: variable.language.directives.other.graphql
+          scope: variable.language.directives.custom.graphql
           push:
             - match: ''
               pop: true
