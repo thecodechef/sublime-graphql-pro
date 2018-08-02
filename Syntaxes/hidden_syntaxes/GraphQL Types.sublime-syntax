@@ -42,8 +42,8 @@ contexts:
   union_types:
 
     - match: '(?<=\= |\| )\b([A-Z][A-Za-z0-9_]+)\b'
-      scope: support.type.language.types.graphql, support.type.language.union-types.graphql
+      scope: support.type.language.union-types.graphql
 
   custom_types:
     - match: '\b([A-Z]+[A-Za-z0-9_]*)\b'
-      scope: support.type.language.types.graphql, support.type.language.custom-types.graphql
+      scope: support.type.language.custom-types.graphql

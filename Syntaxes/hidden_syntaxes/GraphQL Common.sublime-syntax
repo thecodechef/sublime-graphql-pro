@@ -17,54 +17,54 @@ contexts:
 
   reserved_words:
     - match: '^\s*\b(directive(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.directive.graphql
+      scope: keyword.declaration.reserved-words.directive.graphql
     
     - match: '^\s*\b(extends(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.extends.graphql
+      scope: keyword.declaration.reserved-words.extends.graphql
     
     - match: '^\s*\b(mutation(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.mutation.graphql
+      scope: keyword.declaration.reserved-words.mutation.graphql
     
     - match: '^\s*\b(query(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.query.graphql
+      scope: keyword.declaration.reserved-words.query.graphql
     
     - match: '^\s*\b(subscription(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.subscription.graphql
+      scope: keyword.declaration.reserved-words.subscription.graphql
     
     - match: '^\s*\b(type(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.type.graphql
+      scope: keyword.declaration.reserved-words.type.graphql
     
     - match: '^\s*\b(enum(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.enum.graphql
+      scope: keyword.declaration.reserved-words.enum.graphql
     
     - match: '^\s*\b(scalar(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.scalar.graphql
+      scope: keyword.declaration.reserved-words.scalar.graphql
     
     - match: '^\s*\b(schema(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.schema.graphql
+      scope: keyword.declaration.reserved-words.schema.graphql
     
     - match: '^\s*\b(fragment(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.fragment.graphql
+      scope: keyword.declaration.reserved-words.fragment.graphql
     
     - match: '^\s*\b(interface(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.interface.graphql
+      scope: keyword.declaration.reserved-words.interface.graphql
     
     - match: '^\s*\b(input(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.input.graphql
+      scope: keyword.declaration.reserved-words.input.graphql
     
     - match: '^\s*\b(union(?!\s*\:|\s*\=))\b'
-      scope: keyword.declaration.reserved-words.graphql, keyword.declaration.reserved-words.union.graphql
+      scope: keyword.declaration.reserved-words.union.graphql
 
     - match: '(?<=extends |mutation |query |subscription |type |enum |scalar |schema |fragment |interface |input |union )\w+\b'
-      scope: variable.function.reserved-words.graphql, variable.function.reserved-words.type-names.graphql
+      scope: variable.function.reserved-words.type-names.graphql
   
   reserved_operator_words:
     
     - match: '\b(implements)\b'
-      scope: keyword.operator.words.reserved-words.graphql, keyword.operator.words.reserved-words.implements.graphql
+      scope: keyword.operator.words.reserved-words.implements.graphql
     
     - match: '\b(on)\b'
-      scope: keyword.operator.words.reserved-words.graphql, keyword.operator.words.reserved-words.on.graphql
+      scope: keyword.operator.words.reserved-words.on.graphql
 
     - match: '(?<=implements |on )\w+\b'
       scope: string.unquoted.inherited-class.graphql
@@ -78,7 +78,7 @@ contexts:
       scope: constant.numeric.integer.graphql
     
     - match: '([0-9]*\.{1}[0-9]*)\b'
-      scope: constant.numeric.integer.graphql
+      scope: constant.numeric.float.graphql
   
   strings:
     

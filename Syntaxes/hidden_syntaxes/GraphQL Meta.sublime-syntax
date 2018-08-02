@@ -14,21 +14,13 @@ contexts:
   meta_fields:
 
     - match: '\b(__(type|Type))\b'
-      captures:
-        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
-        2: keyword.declaration.introspections.meta-fields.type.graphql
+      scope: keyword.declaration.introspections.meta-fields.type.graphql
 
     - match: '\b(__(typename|TypeName))\b'
-      captures:
-        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
-        2: keyword.declaration.introspections.meta-fields.typename.graphql
+      scope: keyword.declaration.introspections.meta-fields.typename.graphql
 
     - match: '\b(__(typekind|TypeKind))\b'
-      captures:
-        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
-        2: keyword.declaration.introspections.meta-fields.typekind.graphql
+      scope: keyword.declaration.introspections.meta-fields.typekind.graphql
 
     - match: '\b(__(schema|Schema))\b'
-      captures:
-        1: keyword.declaration.introspections.meta-fields.double-underscore.graphql
-        2: keyword.declaration.introspections.meta-fields.schema.graphql
+      scope: keyword.declaration.introspections.meta-fields.schema.graphql

@@ -51,19 +51,3 @@ contexts:
               pop: true
         - match: ''
           pop: true
-    
-    - match: '@'
-      scope: punctuation.definition.directives.graphql
-      push:
-        - match: \b(include|skip|deprecated)\b
-          scope: variable.language.directives.builtins.graphql
-          push:
-            - match: ''
-              pop: true
-        - match: \b([_A-Za-z][_A-Za-z0-9]*)\b
-          scope: variable.language.directives.custom.graphql
-          push:
-            - match: ''
-              pop: true
-        - match: ''
-          pop: true
